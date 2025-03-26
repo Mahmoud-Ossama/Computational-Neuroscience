@@ -2,13 +2,13 @@ import numpy as np
 
 np.random.seed(42)
 
-w1 = np.random.uniform(-0.5, 0.5, (3, 2)) 
-w2 = np.random.uniform(-0.5, 0.5, (2, 1)) 
+w1 = np.random.uniform(-0.5, 0.5) 
+w2 = np.random.uniform(-0.5, 0.5) 
 
 b1 = 0.5 
 b2 = 0.7 
 
-x = np.array([0.1, 0.2, 0.3])
+x = np.array([0.1, 0.05])
 
 def tanh(x):
     return np.tanh(x)
