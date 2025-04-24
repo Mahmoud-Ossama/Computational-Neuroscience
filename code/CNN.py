@@ -6,13 +6,13 @@ from typing import Tuple, List
 import pickle
 
 class ConvLayer:
-    def __init__(self, num_filters: int, filter_size: int, stride: int, padding: int):
+    def __init__(self, num_filters: int, filter_size: int, stride: int, padding: int, input_channels: int = 3):
         self.num_filters = num_filters
         self.filter_size = filter_size
         self.stride = stride
         self.padding = padding
-        # Initialize filters with random values
-        self.filters = np.random.randn(num_filters, filter_size, filter_size, 3) * 0.1
+        # Initialize filters with random values - match input channel count
+        self.filters = np.random.randn(num_filters, filter_size, filter_size, input_channels) * 0.1
         self.biases = np.zeros(num_filters)
     
     def forward(self, input_data: np.ndarray) -> np.ndarray:
@@ -109,12 +109,12 @@ class CNN:
     def build_model(self):
         # Create layers according to the specified architecture
         self.layers = []
-        # Conv1: 8 filters (4×4), stride=2, padding=1
-        self.layers.append(ConvLayer(num_filters=8, filter_size=4, stride=2, padding=1))
+        # Conv1: 8 filters (4×4), stride=2, padding=1, input channels=3 (RGB)
+        self.layers.append(ConvLayer(num_filters=8, filter_size=4, stride=2, padding=1, input_channels=3))
         # MaxPool1: 2×2, stride=2
         self.layers.append(MaxPoolLayer(pool_size=2, stride=2))
-        # Conv2: 16 filters (3×3), stride=1, no padding
-        self.layers.append(ConvLayer(num_filters=16, filter_size=3, stride=1, padding=0))
+        # Conv2: 16 filters (3×3), stride=1, no padding, input channels=8 (from previous conv)
+        self.layers.append(ConvLayer(num_filters=16, filter_size=3, stride=1, padding=0, input_channels=8))
         # MaxPool2: 2×2, stride=2
         self.layers.append(MaxPoolLayer(pool_size=2, stride=2))
         # Flatten
