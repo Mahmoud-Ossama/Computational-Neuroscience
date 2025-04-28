@@ -4,7 +4,7 @@ Build an RNN for a text contains 4 words. The target is predicting the 4th word.
 
 import numpy as np
 
-vocabulary = ['Mahmoud', 'is', 'the', 'best']
+vocabulary = ['Mahmoud_Osama', 'is', 'the', 'best']
 vocab_size = len(vocabulary)
 word_to_idx = {word: i for i, word in enumerate(vocabulary)}
 idx_to_word = {i: word for i, word in enumerate(vocabulary)}
@@ -14,7 +14,7 @@ def one_hot_encode(word):
     one_hot[word_to_idx[word]] = 1
     return one_hot
 
-input_sequence = ['Mahmoud', 'is', 'the']
+input_sequence = ['Mahmoud_Osama', 'is', 'the']
 target_word = 'best'
 
 X = [one_hot_encode(word) for word in input_sequence]
